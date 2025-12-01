@@ -82,11 +82,12 @@ i18n
   .use(initReactI18next)
   .init({
     resources,
-    lng: Localization.locale.split('-')[0],
+    lng: (Localization.locale || 'en').split('-')[0],
     fallbackLng: 'en',
     interpolation: {
       escapeValue: false,
     },
+    compatibilityJSON: 'v3',
   });
 
 export default i18n;
