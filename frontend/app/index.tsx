@@ -230,11 +230,12 @@ export default function SplashScreen() {
           ))}
         </View>
         
-        <View style={styles.buttonContainer}>
+        {/* Buttons Section - Unified Radius */}
+        <View style={styles.buttonsSection}>
           <TouchableOpacity 
             style={styles.primaryButton}
             onPress={() => router.push('/auth/login')}
-            activeOpacity={0.8}
+            activeOpacity={0.85}
           >
             <LinearGradient
               colors={NovaGradients.primaryHologram}
@@ -243,21 +244,18 @@ export default function SplashScreen() {
               end={{ x: 1, y: 1 }}
             >
               <Text style={styles.primaryButtonText}>Get Started</Text>
-              <Ionicons name="arrow-forward" size={20} color={NovaColors.textPlatinum} />
+              <Ionicons name="arrow-forward" size={18} color={NovaColors.textPlatinum} />
             </LinearGradient>
           </TouchableOpacity>
           
           <TouchableOpacity 
             style={styles.secondaryButton}
             onPress={() => router.push('/auth/register')}
-            activeOpacity={0.8}
+            activeOpacity={0.85}
           >
-            <LinearGradient
-              colors={[NovaColors.glassLight, NovaColors.backgroundCard]}
-              style={styles.buttonGradient}
-            >
+            <View style={styles.secondaryButtonContent}>
               <Text style={styles.secondaryButtonText}>Create Account</Text>
-            </LinearGradient>
+            </View>
           </TouchableOpacity>
         </View>
       </View>
