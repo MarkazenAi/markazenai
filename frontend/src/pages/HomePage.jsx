@@ -114,8 +114,8 @@ const HomePage = ({ language }) => {
 
         {/* CTA Section */}
         <GlassCard neon className="text-center p-12">
-          <h2 className="text-3xl font-semibold mb-4 nova-cta-title">Ready to Explore?</h2>
-          <p className="text-gray-300 mb-6 max-w-2xl mx-auto nova-cta-sub">
+          <h2 className="text-4xl font-bold mb-4 nova-cta-title tracking-tight">Ready to Explore?</h2>
+          <p className="text-gray-300 mb-6 max-w-2xl mx-auto nova-cta-sub text-base">
             Powered by Nova Q7 Core — faster, smarter, global.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
