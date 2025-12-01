@@ -1,6 +1,8 @@
 // Nova Q7 Ultra Titan v6 PLATINUM EDITION
 // Premium Typography System 2026-2027
 
+import { Platform } from 'react-native';
+
 export const Typography = {
   // Premium font families (using system fonts with fallbacks)
   // For custom fonts, use expo-google-fonts or expo-font
