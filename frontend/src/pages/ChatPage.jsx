@@ -139,7 +139,7 @@ const ChatPage = ({ language }) => {
             <div className="text-center py-12" data-testid="chat-empty-state">
               <HologramLogo size="normal" animate />
               <h2 className="text-2xl font-bold mt-6 mb-2">Start a Conversation</h2>
-              <p className="text-gray-400">Ask me anything, I'm here to help!</p>
+              <p className="text-gray-400">Ask me anything, I&apos;m here to help!</p>
             </div>
           )}
 

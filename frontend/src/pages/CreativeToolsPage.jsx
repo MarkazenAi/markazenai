@@ -74,7 +74,7 @@ const CreativeToolsPage = ({ language }) => {
                 {tools.find(t => t.id === selectedTool)?.name}
               </h3>
               <p className="text-gray-300 mb-6">
-                This tool is coming soon! We're working on bringing you the best AI-powered creative experience.
+                This tool is coming soon! We&apos;re working on bringing you the best AI-powered creative experience.
               </p>
               <NeonButton variant="primary" data-testid="tool-coming-soon-button">
                 Stay Tuned
