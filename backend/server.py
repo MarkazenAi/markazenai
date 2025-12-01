@@ -179,6 +179,10 @@ async def get_manufacturing_orders(user_id: str):
     """Get manufacturing orders"""
     try:
         orders = await db.manufacturing_orders.find({"user_id": user_id}).to_list(100)
+        # Convert ObjectId to string
+        for order in orders:
+            if '_id' in order:
+                order['_id'] = str(order['_id'])
         return {"orders": orders}
     except Exception as e:
         raise HTTPException(status_code=500, detail=str(e))
