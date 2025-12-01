@@ -68,10 +68,10 @@ const HomePage = ({ language }) => {
 
         {/* Quick Actions */}
         <div className="mb-12">
-          <h2 className="text-2xl font-semibold mb-6 text-center nova-section-title">
+          <h2 className="text-3xl font-bold mb-3 text-center nova-section-title tracking-tight">
             Begin Your Intelligent Journey
           </h2>
-          <p className="text-center text-gray-300 mb-8 max-w-3xl mx-auto nova-section-sub">
+          <p className="text-center text-gray-300 mb-8 max-w-3xl mx-auto nova-section-sub text-base">
             Experience holographic UI, multi-agent architecture, and next-generation AI tools.
           </p>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
