@@ -185,15 +185,19 @@ export default function SplashScreen() {
       <View style={styles.cosmicOverlay} />
       
       <View style={styles.content}>
-        <Animated.View style={[styles.logoContainer, { transform: [{ scale: scaleAnim }] }]}>
-          <View style={styles.logoCircle}>
-            <LinearGradient
-              colors={NovaGradients.primaryHologram}
-              style={styles.logoGradient}
-            >
-              <Ionicons name="flash" size={100} color={NovaColors.textPlatinum} />
-            </LinearGradient>
-          </View>
+        {/* Logo Section - Centered */}
+        <View style={styles.logoSection}>
+          <Animated.View style={{ transform: [{ scale: scaleAnim }] }}>
+            <View style={styles.logoCircle}>
+              <LinearGradient
+                colors={NovaGradients.primaryHologram}
+                style={styles.logoGradient}
+              >
+                <Ionicons name="flash" size={80} color={NovaColors.textPlatinum} />
+              </LinearGradient>
+            </View>
+          </Animated.View>
+          
           <Text style={styles.title}>NOVA Q7</Text>
           <LinearGradient
             colors={[NovaColors.neonGold, NovaColors.hologramGold]}
@@ -204,21 +208,22 @@ export default function SplashScreen() {
             <Text style={styles.subtitle}>Ultra Titan v6 Platinum</Text>
           </LinearGradient>
           <Text style={styles.tagline}>AI-Powered Super App</Text>
-        </Animated.View>
+        </View>
         
-        <View style={styles.features}>
+        {/* Features Section - Equal Spacing */}
+        <View style={styles.featuresSection}>
           {[
             { icon: 'apps', text: '30+ AI Modules', color: NovaColors.hologramPurple },
             { icon: 'git-network', text: '24 Parallel Agents', color: NovaColors.hologramBlue },
             { icon: 'language', text: '65 Languages', color: NovaColors.hologramPink },
             { icon: 'cloud-offline', text: 'Offline Mode', color: NovaColors.neonGold },
           ].map((feature, idx) => (
-            <View key={idx} style={styles.featureItem}>
+            <View key={idx} style={styles.featureCard}>
               <LinearGradient
-                colors={[feature.color + '40', feature.color + '10']}
+                colors={[feature.color + '30', feature.color + '08']}
                 style={styles.featureIcon}
               >
-                <Ionicons name={feature.icon as any} size={20} color={feature.color} />
+                <Ionicons name={feature.icon as any} size={22} color={feature.color} />
               </LinearGradient>
               <Text style={styles.featureText}>{feature.text}</Text>
             </View>
