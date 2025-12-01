@@ -95,11 +95,11 @@ const SettingsPage = ({ language, setLanguage }) => {
     <div className="min-h-screen p-6 pb-24" data-testid="settings-page">
       <div className="max-w-4xl mx-auto">
         {/* Header */}
-        <div className="flex items-center gap-4 mb-8">
+        <div className="flex items-center gap-4 mb-8 animate-fade-up">
           <HologramLogo size="small" animate />
           <div>
-            <h1 className="text-3xl font-semibold nova-title">Settings</h1>
-            <p className="text-gray-400 nova-subtitle">Customize your Nova Q7 experience</p>
+            <h1 className="text-4xl font-bold nova-hero-title tracking-tight">Settings</h1>
+            <p className="text-gray-400 nova-subtitle text-sm">Customize your Nova Q7 experience</p>
           </div>
         </div>
 
