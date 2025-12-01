@@ -13,15 +13,15 @@ import LoadingScreen from './components/LoadingScreen';
 
 function App() {
   const [loading, setLoading] = useState(true);
-  const [language, setLanguage] = useState('en');
+  const [language, setLanguage] = useState(() => {
+    // Detect browser language on initial mount
+    return navigator.language.split('-')[0];
+  });
 
   useEffect(() => {
-    // Detect browser language
-    const browserLang = navigator.language.split('-')[0];
-    setLanguage(browserLang);
-    
     // Simulate initial loading
-    setTimeout(() => setLoading(false), 2000);
+    const timer = setTimeout(() => setLoading(false), 2000);
+    return () => clearTimeout(timer);
   }, []);
 
   if (loading) {
