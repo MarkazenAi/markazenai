@@ -4,6 +4,8 @@
   align-items: center;
   justify-content: center;
   perspective: 1000px;
+  opacity: 0.8;
+  transform: scale(0.9);
 }
 
 .hologram-core {
