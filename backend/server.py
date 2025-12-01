@@ -302,6 +302,9 @@ async def create_note(note: Note):
 async def get_notes(user_id: str):
     """Get notes"""
     notes = await db.notes.find({"user_id": user_id}).to_list(1000)
+    for note in notes:
+        if '_id' in note:
+            note['_id'] = str(note['_id'])
     return {"notes": notes}
 
 @api_router.post("/todos")
@@ -314,6 +317,9 @@ async def create_todo(todo: TodoItem):
 async def get_todos(user_id: str):
     """Get todos"""
     todos = await db.todos.find({"user_id": user_id}).to_list(1000)
+    for todo in todos:
+        if '_id' in todo:
+            todo['_id'] = str(todo['_id'])
     return {"todos": todos}
 
 # ==================== HISTORY ====================
@@ -331,6 +337,9 @@ async def get_history(user_id: str, module: str = None):
     if module:
         query["module"] = module
     history = await db.history.find(query).sort("timestamp", -1).to_list(1000)
+    for item in history:
+        if '_id' in item:
+            item['_id'] = str(item['_id'])
     return {"history": history}
 
 # ==================== HEALTH CHECK ====================
