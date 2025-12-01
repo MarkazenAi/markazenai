@@ -1,0 +1,121 @@
+.hologram-logo {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  perspective: 1000px;
+}
+
+.hologram-core {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  transform-style: preserve-3d;
+}
+
+.hologram-logo.animate .hologram-core {
+  animation: hologramSpin 8s linear infinite;
+}
+
+.hologram-ring {
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  border: 2px solid;
+  opacity: 0.3;
+  transform-style: preserve-3d;
+}
+
+.hologram-logo.animate .ring-1 {
+  border-color: #00f2ff;
+  animation: ringPulse 2s ease-in-out infinite, ringRotate1 4s linear infinite;
+}
+
+.hologram-logo.animate .ring-2 {
+  border-color: #7b2fff;
+  animation: ringPulse 2s ease-in-out 0.5s infinite, ringRotate2 5s linear infinite;
+  transform: scale(0.85);
+}
+
+.hologram-logo.animate .ring-3 {
+  border-color: #ff006e;
+  animation: ringPulse 2s ease-in-out 1s infinite, ringRotate3 6s linear infinite;
+  transform: scale(0.7);
+}
+
+.hologram-center {
+  position: absolute;
+  inset: 10%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.hologram-glow {
+  position: absolute;
+  inset: -20%;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(123, 47, 255, 0.3) 0%, transparent 70%);
+  filter: blur(20px);
+  opacity: 0;
+}
+
+.hologram-logo.animate .hologram-glow {
+  animation: glowPulse 3s ease-in-out infinite;
+}
+
+@keyframes hologramSpin {
+  0% {
+    transform: rotateY(0deg) rotateX(5deg);
+  }
+  100% {
+    transform: rotateY(360deg) rotateX(5deg);
+  }
+}
+
+@keyframes ringPulse {
+  0%, 100% {
+    opacity: 0.3;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.8;
+    transform: scale(1.05);
+  }
+}
+
+@keyframes ringRotate1 {
+  0% {
+    transform: rotateZ(0deg);
+  }
+  100% {
+    transform: rotateZ(360deg);
+  }
+}
+
+@keyframes ringRotate2 {
+  0% {
+    transform: rotateZ(0deg) scale(0.85);
+  }
+  100% {
+    transform: rotateZ(-360deg) scale(0.85);
+  }
+}
+
+@keyframes ringRotate3 {
+  0% {
+    transform: rotateZ(0deg) scale(0.7);
+  }
+  100% {
+    transform: rotateZ(360deg) scale(0.7);
+  }
+}
+
+@keyframes glowPulse {
+  0%, 100% {
+    opacity: 0.5;
+  }
+  50% {
+    opacity: 1;
+  }
+}
