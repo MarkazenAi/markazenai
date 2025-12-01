@@ -350,12 +350,42 @@ async def get_history(user_id: str, module: str = None):
             item['_id'] = str(item['_id'])
     return {"history": history}
 
+# ==================== MULTI-AGENT SYSTEM ====================
+
+@api_router.get("/agents/status")
+async def get_agents_status():
+    """Get multi-agent system status"""
+    global agent_orchestrator
+    if agent_orchestrator is None:
+        agent_orchestrator = get_orchestrator(EMERGENT_LLM_KEY)
+    return agent_orchestrator.get_system_stats()
+
+@api_router.post("/agents/task")
+async def submit_agent_task(agent_type: str, task_data: dict):
+    """Submit a task to the multi-agent system"""
+    global agent_orchestrator
+    if agent_orchestrator is None:
+        agent_orchestrator = get_orchestrator(EMERGENT_LLM_KEY)
+    task_id = await agent_orchestrator.submit_task(agent_type, task_data)
+    return {"task_id": task_id, "status": "submitted"}
+
+@api_router.get("/agents/task/{task_id}")
+async def get_agent_task_result(task_id: str):
+    """Get result of an agent task"""
+    global agent_orchestrator
+    if agent_orchestrator is None:
+        return {"error": "Agent system not initialized"}
+    task = await agent_orchestrator.get_task_result(task_id)
+    if task:
+        return {"task_id": task.task_id, "status": task.status, "result": task.result, "error": task.error}
+    return {"error": "Task not found"}
+
 # ==================== HEALTH CHECK ====================
 
 @api_router.get("/health")
 async def health_check():
     """Health check"""
-    return {"status": "healthy", "service": "Nova Q7 Ultra Titan v5 API", "version": "5.0", "modules": ["AI Chat", "Image Gen", "Voice I/O", "PDF", "Face Swap", "Remove BG", "Business AI", "Manufacturing", "IoT", "Social", "Email AI", "Education", "Legal AI", "Travel", "QR", "Notes", "Todo"]}
+    return {"status": "healthy", "service": "Nova Q7 Ultra Titan v5 API", "version": "5.0", "multi_agent_system": "enabled", "total_agents": 24, "modules": ["AI Chat", "Image Gen", "Voice I/O", "PDF", "Face Swap", "Remove BG", "Business AI", "Manufacturing", "IoT", "Social", "Email AI", "Education", "Legal AI", "Travel", "QR", "Notes", "Todo"]}
 
 # Include router
 app.include_router(api_router)
