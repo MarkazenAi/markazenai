@@ -15,14 +15,16 @@ from passlib.context import CryptContext
 from models import *
 from ai_services import ai_services
 from multi_agent_system import get_orchestrator
+from offline_engine import get_offline_engine
 
 # Load environment
 ROOT_DIR = Path(__file__).parent
 load_dotenv(ROOT_DIR / '.env')
 
-# Multi-Agent System
+# Multi-Agent System & Offline Engine
 EMERGENT_LLM_KEY = os.getenv('EMERGENT_LLM_KEY')
 agent_orchestrator = None
+offline_ai_engine = None
 
 # MongoDB connection
 mongo_url = os.environ['MONGO_URL']
