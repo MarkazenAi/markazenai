@@ -1,9 +1,11 @@
-import React from 'react';
-import { View, Text, StyleSheet, ScrollView, TouchableOpacity, Dimensions } from 'react-native';
+// Nova Q7 Ultra Titan v6 PLATINUM EDITION - Home Screen
+import React, { useRef, useEffect } from 'react';
+import { View, Text, StyleSheet, ScrollView, TouchableOpacity, Dimensions, Animated } from 'react-native';
 import { useRouter } from 'expo-router';
 import { LinearGradient } from 'expo-linear-gradient';
 import { Ionicons } from '@expo/vector-icons';
-import { NovaColors } from '../../theme/colors';
+import { NovaColors, NovaGradients, NovaShadows } from '../../theme/colors';
+import { Typography } from '../../theme/typography';
 import { Spacing } from '../../theme/spacing';
 import { useUserStore } from '../../store/userStore';
 import { SafeAreaView } from 'react-native-safe-area-context';
