@@ -1,8 +1,76 @@
 /* Premium HoloUI Styles */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap');
+
 .App {
   min-height: 100vh;
   position: relative;
   overflow-x: hidden;
+  font-family: 'Poppins', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+}
+
+/* Nova Q7 Typography */
+.nova-title {
+  font-family: 'Poppins', sans-serif;
+  font-weight: 600;
+  letter-spacing: -0.02em;
+}
+
+.nova-subtitle {
+  font-family: 'Poppins', sans-serif;
+  font-weight: 500;
+  letter-spacing: -0.01em;
+}
+
+.nova-version {
+  font-family: 'Poppins', sans-serif;
+  font-weight: 500;
+  letter-spacing: -0.01em;
+}
+
+.nova-section-title,
+.nova-hero-title,
+.nova-cta-title,
+.nova-empty-title,
+.nova-detail-title,
+.nova-profile-name {
+  font-family: 'Poppins', sans-serif;
+  font-weight: 600;
+  letter-spacing: -0.02em;
+}
+
+.nova-section-sub,
+.nova-hero-sub,
+.nova-cta-sub,
+.nova-empty-sub,
+.nova-detail-desc,
+.nova-profile-email,
+.nova-profile-joined,
+.nova-setting-desc,
+.nova-stat-subtitle,
+.nova-tool-desc,
+.nova-version-text,
+.nova-powered {
+  font-family: 'Poppins', sans-serif;
+  font-weight: 500;
+  letter-spacing: -0.01em;
+}
+
+.nova-card-title,
+.nova-stat-title,
+.nova-module-name,
+.nova-tool-name,
+.nova-setting-title,
+.nova-setting-label,
+.nova-group-title {
+  font-family: 'Poppins', sans-serif;
+  font-weight: 600;
+  letter-spacing: -0.02em;
+}
+
+.nova-filter-btn,
+.nova-agent-btn {
+  font-family: 'Poppins', sans-serif;
+  font-weight: 500;
 }
 
 /* Smooth Scrolling */
