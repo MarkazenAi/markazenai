@@ -93,6 +93,9 @@ async def get_chat_history(user_id: str, session_id: str):
     """Get chat history"""
     try:
         messages = await db.chat_messages.find({"user_id": user_id, "session_id": session_id}).sort("timestamp", 1).to_list(1000)
+        for msg in messages:
+            if '_id' in msg:
+                msg['_id'] = str(msg['_id'])
         return {"messages": messages}
     except Exception as e:
         logger.error(f"Error getting chat history: {e}")
