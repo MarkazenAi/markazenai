@@ -85,12 +85,12 @@ class UserSettings(BaseModel):
 @api_router.get("/")
 async def root():
     return {
-        "message": "HoloUI AI Platform API",
+        "message": "Nova Q7 Intelligence Hub API",
         "version": "1.0.0",
         "status": "operational",
         "agents": len(AI_AGENTS),
         "modules": len(AI_MODULES),
-        "languages": len(SUPPORTED_LANGUAGES)
+        "languages": 75
     }
 
 @api_router.post("/status", response_model=StatusCheck)
