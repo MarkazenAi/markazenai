@@ -264,26 +264,28 @@ export default function SplashScreen() {
 }
 
 const styles = StyleSheet.create({
+  // Base container with cosmic gradient
   container: {
     flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
   },
   cosmicOverlay: {
     ...StyleSheet.absoluteFillObject,
-    backgroundColor: 'rgba(26,0,51,0.2)',
+    backgroundColor: 'rgba(26,0,51,0.15)',
   },
+  
+  // Main content - centered with equal spacing
   content: {
     flex: 1,
-    justifyContent: 'space-around',
+    justifyContent: 'space-evenly',
     alignItems: 'center',
-    paddingVertical: Spacing.xxl,
-    width: '100%',
+    paddingVertical: Spacing.xl,
     paddingHorizontal: Spacing.lg,
   },
-  logoContainer: {
+  
+  // Logo Section - centered alignment
+  logoSection: {
     alignItems: 'center',
-    marginTop: Spacing.xxl,
+    width: '100%',
   },
   hologramRing: {
     position: 'absolute',
