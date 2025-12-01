@@ -101,10 +101,10 @@ const ChatPage = ({ language }) => {
       {/* Header with Agent Selection */}
       <div className="p-4 backdrop-blur-xl bg-black/30 border-b border-white/10">
         <div className="max-w-4xl mx-auto">
-          <div className="flex items-center gap-4 mb-4">
+          <div className="flex items-center gap-4 mb-4 animate-fade-up">
             <HologramLogo size="mini" animate />
             <div>
-              <h1 className="text-xl font-semibold nova-title">AI Chat & Voice</h1>
+              <h1 className="text-2xl font-bold nova-hero-title tracking-tight">AI Chat & Voice</h1>
               <p className="text-sm text-gray-400 nova-subtitle">24 Autonomous AI Agents</p>
             </div>
           </div>
@@ -119,7 +119,7 @@ const ChatPage = ({ language }) => {
                   data-testid={`agent-${agent.id}`}
                   className={`flex items-center gap-2 px-4 py-2 rounded-xl font-medium whitespace-nowrap transition-all nova-agent-btn ${
                     selectedAgent?.id === agent.id
-                      ? 'bg-gradient-to-r from-cyan-500 to-purple-600 text-white'
+                      ? 'bg-gradient-to-r from-purple-500 to-blue-600 text-white'
                       : 'bg-white/5 text-gray-400 hover:bg-white/10'
                   }`}
                 >
@@ -136,9 +136,9 @@ const ChatPage = ({ language }) => {
       <ScrollArea className="flex-1 p-4 pb-32">
         <div className="max-w-4xl mx-auto space-y-4">
           {messages.length === 0 && (
-            <div className="text-center py-12" data-testid="chat-empty-state">
+            <div className="text-center py-12 animate-fade-up" data-testid="chat-empty-state">
               <HologramLogo size="normal" animate />
-              <h2 className="text-2xl font-semibold mt-6 mb-2 nova-empty-title">Start a Conversation</h2>
+              <h2 className="text-3xl font-bold mt-6 mb-2 nova-empty-title tracking-tight">Start a Conversation</h2>
               <p className="text-gray-400 nova-empty-sub">Ask me anything, I&apos;m here to help!</p>
             </div>
           )}
@@ -153,7 +153,7 @@ const ChatPage = ({ language }) => {
             >
               {message.role === 'assistant' && (
                 <div className="flex-shrink-0">
-                  <div className="w-10 h-10 rounded-full bg-gradient-to-r from-cyan-500 to-purple-600 flex items-center justify-center">
+                  <div className="w-10 h-10 rounded-full bg-gradient-to-r from-purple-500 to-blue-600 flex items-center justify-center">
                     <Bot className="w-6 h-6" />
                   </div>
                 </div>
@@ -162,7 +162,7 @@ const ChatPage = ({ language }) => {
               <GlassCard
                 className={`max-w-2xl nova-message ${
                   message.role === 'user'
-                    ? 'bg-gradient-to-r from-cyan-500/20 to-purple-500/20'
+                    ? 'bg-gradient-to-r from-purple-500/20 to-blue-500/20'
                     : message.error
                     ? 'bg-red-500/20'
                     : ''
@@ -188,14 +188,14 @@ const ChatPage = ({ language }) => {
 
           {loading && (
             <div className="flex gap-3 justify-start" data-testid="chat-loading">
-              <div className="w-10 h-10 rounded-full bg-gradient-to-r from-cyan-500 to-purple-600 flex items-center justify-center">
+              <div className="w-10 h-10 rounded-full bg-gradient-to-r from-purple-500 to-blue-600 flex items-center justify-center">
                 <Bot className="w-6 h-6 animate-pulse" />
               </div>
               <GlassCard>
                 <div className="flex gap-2">
-                  <div className="w-2 h-2 bg-cyan-400 rounded-full animate-bounce" />
-                  <div className="w-2 h-2 bg-purple-400 rounded-full animate-bounce" style={{ animationDelay: '0.1s' }} />
-                  <div className="w-2 h-2 bg-pink-400 rounded-full animate-bounce" style={{ animationDelay: '0.2s' }} />
+                  <div className="w-2 h-2 bg-purple-400 rounded-full animate-bounce" />
+                  <div className="w-2 h-2 bg-blue-400 rounded-full animate-bounce" style={{ animationDelay: '0.1s' }} />
+                  <div className="w-2 h-2 bg-cyan-400 rounded-full animate-bounce" style={{ animationDelay: '0.2s' }} />
                 </div>
               </GlassCard>
             </div>
