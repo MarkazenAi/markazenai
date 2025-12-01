@@ -55,7 +55,7 @@ const SettingsPage = ({ language, setLanguage }) => {
           id: 'analytics',
           icon: Shield,
           label: 'Usage Analytics',
-          description: 'Help improve the app',
+          description: 'Help improve Nova Q7',
           value: settings.analytics,
           action: () => toggleSetting('analytics')
         }
@@ -82,7 +82,7 @@ const SettingsPage = ({ language, setLanguage }) => {
           id: 'help',
           icon: HelpCircle,
           label: 'Help & Support',
-          description: 'Get help with HoloUI',
+          description: 'Get help with Nova Q7',
           value: null,
           isButton: true,
           action: () => console.log('Open help')
@@ -98,8 +98,8 @@ const SettingsPage = ({ language, setLanguage }) => {
         <div className="flex items-center gap-4 mb-8">
           <HologramLogo size="small" animate />
           <div>
-            <h1 className="text-3xl font-bold">Settings</h1>
-            <p className="text-gray-400">Customize your experience</p>
+            <h1 className="text-3xl font-semibold nova-title">Settings</h1>
+            <p className="text-gray-400 nova-subtitle">Customize your Nova Q7 experience</p>
           </div>
         </div>
 
@@ -107,7 +107,7 @@ const SettingsPage = ({ language, setLanguage }) => {
         <div className="space-y-6">
           {settingsGroups.map((group, groupIndex) => (
             <div key={groupIndex}>
-              <h2 className="text-lg font-semibold mb-3 text-gray-300">{group.title}</h2>
+              <h2 className="text-lg font-semibold mb-3 text-gray-300 nova-group-title">{group.title}</h2>
               <GlassCard className="divide-y divide-white/5">
                 {group.items.map((item, itemIndex) => {
                   const Icon = item.icon;
@@ -121,8 +121,8 @@ const SettingsPage = ({ language, setLanguage }) => {
                         <Icon className="w-5 h-5" />
                       </div>
                       <div className="flex-1">
-                        <h3 className="font-semibold">{item.label}</h3>
-                        <p className="text-sm text-gray-400">{item.description}</p>
+                        <h3 className="font-semibold nova-setting-label">{item.label}</h3>
+                        <p className="text-sm text-gray-400 nova-setting-desc">{item.description}</p>
                       </div>
                       {item.isButton ? (
                         <NeonButton
@@ -162,8 +162,8 @@ const SettingsPage = ({ language, setLanguage }) => {
 
         {/* App Version */}
         <div className="mt-8 text-center text-sm text-gray-500">
-          <p>HoloUI Platform v1.0.0</p>
-          <p className="mt-1">Premium AI Multi-Agent System</p>
+          <p className="nova-version-text">Nova Q7 Intelligence Hub v1.0.0</p>
+          <p className="mt-1 nova-powered">Powered by Nova Q7 Core — faster, smarter, global.</p>
         </div>
       </div>
     </div>
