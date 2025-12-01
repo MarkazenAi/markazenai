@@ -41,7 +41,6 @@ const ModulesPage = ({ language }) => {
 
   const handleModuleClick = async (module) => {
     setExecuting(module.id);
-    // Simulate module execution
     setTimeout(() => setExecuting(null), 2000);
   };
 
@@ -53,8 +52,8 @@ const ModulesPage = ({ language }) => {
           <div className="flex items-center gap-4">
             <HologramLogo size="small" animate />
             <div>
-              <h1 className="text-3xl font-bold">AI Modules</h1>
-              <p className="text-gray-400">30+ Specialized AI Tools</p>
+              <h1 className="text-3xl font-semibold nova-title">Smart AI Modules</h1>
+              <p className="text-gray-400 nova-subtitle">30+ Specialized Intelligence Tools</p>
             </div>
           </div>
         </div>
@@ -79,7 +78,7 @@ const ModulesPage = ({ language }) => {
                 key={category}
                 onClick={() => setSelectedCategory(category)}
                 data-testid={`category-${category}`}
-                className={`px-4 py-2 rounded-xl font-medium whitespace-nowrap transition-all ${
+                className={`px-4 py-2 rounded-xl font-medium whitespace-nowrap transition-all nova-filter-btn ${
                   selectedCategory === category
                     ? 'bg-gradient-to-r from-cyan-500 to-purple-600 text-white'
                     : 'bg-white/5 text-gray-400 hover:bg-white/10'
@@ -95,7 +94,7 @@ const ModulesPage = ({ language }) => {
         {loading ? (
           <div className="text-center py-12">
             <HologramLogo size="normal" animate />
-            <p className="mt-4 text-gray-400">Loading modules...</p>
+            <p className="mt-4 text-gray-400 nova-loading">Loading modules...</p>
           </div>
         ) : (
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
@@ -111,8 +110,8 @@ const ModulesPage = ({ language }) => {
               >
                 <div className="text-center">
                   <div className="text-4xl mb-3">{module.icon}</div>
-                  <h3 className="font-semibold mb-1">{module.name}</h3>
-                  <span className="text-xs text-gray-400 px-3 py-1 rounded-full bg-white/5">
+                  <h3 className="font-semibold mb-1 nova-module-name">{module.name}</h3>
+                  <span className="text-xs text-gray-400 px-3 py-1 rounded-full bg-white/5 nova-module-cat">
                     {module.category}
                   </span>
                 </div>
@@ -124,7 +123,7 @@ const ModulesPage = ({ language }) => {
         {filteredModules.length === 0 && !loading && (
           <div className="text-center py-12">
             <Sparkles className="w-16 h-16 mx-auto mb-4 text-gray-400" />
-            <p className="text-gray-400">No modules found</p>
+            <p className="text-gray-400 nova-empty">No modules found</p>
           </div>
         )}
       </div>

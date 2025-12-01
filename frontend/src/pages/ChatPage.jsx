@@ -104,8 +104,8 @@ const ChatPage = ({ language }) => {
           <div className="flex items-center gap-4 mb-4">
             <HologramLogo size="mini" animate />
             <div>
-              <h1 className="text-xl font-bold">AI Chat</h1>
-              <p className="text-sm text-gray-400">24 Specialized Agents</p>
+              <h1 className="text-xl font-semibold nova-title">AI Chat & Voice</h1>
+              <p className="text-sm text-gray-400 nova-subtitle">24 Autonomous AI Agents</p>
             </div>
           </div>
           
@@ -117,7 +117,7 @@ const ChatPage = ({ language }) => {
                   key={agent.id}
                   onClick={() => setSelectedAgent(agent)}
                   data-testid={`agent-${agent.id}`}
-                  className={`flex items-center gap-2 px-4 py-2 rounded-xl font-medium whitespace-nowrap transition-all ${
+                  className={`flex items-center gap-2 px-4 py-2 rounded-xl font-medium whitespace-nowrap transition-all nova-agent-btn ${
                     selectedAgent?.id === agent.id
                       ? 'bg-gradient-to-r from-cyan-500 to-purple-600 text-white'
                       : 'bg-white/5 text-gray-400 hover:bg-white/10'
@@ -138,8 +138,8 @@ const ChatPage = ({ language }) => {
           {messages.length === 0 && (
             <div className="text-center py-12" data-testid="chat-empty-state">
               <HologramLogo size="normal" animate />
-              <h2 className="text-2xl font-bold mt-6 mb-2">Start a Conversation</h2>
-              <p className="text-gray-400">Ask me anything, I&apos;m here to help!</p>
+              <h2 className="text-2xl font-semibold mt-6 mb-2 nova-empty-title">Start a Conversation</h2>
+              <p className="text-gray-400 nova-empty-sub">Ask me anything, I&apos;m here to help!</p>
             </div>
           )}
 
@@ -160,7 +160,7 @@ const ChatPage = ({ language }) => {
               )}
               
               <GlassCard
-                className={`max-w-2xl ${
+                className={`max-w-2xl nova-message ${
                   message.role === 'user'
                     ? 'bg-gradient-to-r from-cyan-500/20 to-purple-500/20'
                     : message.error
@@ -215,7 +215,7 @@ const ChatPage = ({ language }) => {
             onChange={(e) => setInputMessage(e.target.value)}
             onKeyPress={handleKeyPress}
             disabled={loading}
-            className="flex-1 bg-white/5 border-white/10 text-white placeholder:text-gray-400 h-12 rounded-xl"
+            className="flex-1 bg-white/5 border-white/10 text-white placeholder:text-gray-400 h-12 rounded-xl nova-input"
             data-testid="chat-input"
           />
           <NeonButton
