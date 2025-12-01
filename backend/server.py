@@ -203,6 +203,9 @@ async def control_iot_device(control: IoTDeviceControl):
 async def get_iot_devices(user_id: str):
     """Get IoT devices"""
     devices = await db.iot_devices.find({"user_id": user_id}).to_list(100)
+    for device in devices:
+        if '_id' in device:
+            device['_id'] = str(device['_id'])
     return {"devices": devices}
 
 # ==================== SOCIAL MEDIA ====================
@@ -217,6 +220,9 @@ async def create_social_post(post: SocialMediaPost):
 async def get_social_posts(user_id: str):
     """Get social posts"""
     posts = await db.social_posts.find({"user_id": user_id}).to_list(100)
+    for post in posts:
+        if '_id' in post:
+            post['_id'] = str(post['_id'])
     return {"posts": posts}
 
 # ==================== EMAIL AUTOMATION ====================
