@@ -7,7 +7,7 @@ import { User, Mail, Globe, Calendar, TrendingUp, MessageSquare, Sparkles } from
 const ProfilePage = ({ language }) => {
   const [profile, setProfile] = useState({
     name: 'AI Explorer',
-    email: 'explorer@holoui.com',
+    email: 'explorer@novaq7.ai',
     avatar: null,
     language: language || 'en',
     joinedDate: new Date().toLocaleDateString(),
@@ -33,8 +33,8 @@ const ProfilePage = ({ language }) => {
         <div className="flex items-center gap-4 mb-8">
           <HologramLogo size="small" animate />
           <div>
-            <h1 className="text-3xl font-bold">Profile</h1>
-            <p className="text-gray-400">Your AI Journey</p>
+            <h1 className="text-3xl font-semibold nova-title">Your AI Control Center</h1>
+            <p className="text-gray-400 nova-subtitle">Your Nova Q7 Journey</p>
           </div>
         </div>
 
@@ -44,14 +44,14 @@ const ProfilePage = ({ language }) => {
             <div className="w-24 h-24 rounded-full bg-gradient-to-r from-cyan-500 via-purple-500 to-pink-500 flex items-center justify-center mb-4">
               <User className="w-12 h-12 text-white" />
             </div>
-            <h2 className="text-2xl font-bold mb-2" data-testid="profile-name">{profile.name}</h2>
+            <h2 className="text-2xl font-semibold mb-2 nova-profile-name" data-testid="profile-name">{profile.name}</h2>
             <div className="flex items-center gap-2 text-gray-400 mb-2">
               <Mail className="w-4 h-4" />
-              <span data-testid="profile-email">{profile.email}</span>
+              <span data-testid="profile-email" className="nova-profile-email">{profile.email}</span>
             </div>
             <div className="flex items-center gap-2 text-gray-400 mb-4">
               <Calendar className="w-4 h-4" />
-              <span>Joined {profile.joinedDate}</span>
+              <span className="nova-profile-joined">Joined {profile.joinedDate}</span>
             </div>
             <NeonButton
               variant="glass"
@@ -70,8 +70,8 @@ const ProfilePage = ({ language }) => {
             return (
               <GlassCard key={index} className="text-center" data-testid={`stat-${index}`}>
                 <Icon className={`w-12 h-12 mx-auto mb-3 ${stat.color}`} />
-                <p className="text-3xl font-bold mb-1">{stat.value}</p>
-                <p className="text-sm text-gray-400">{stat.label}</p>
+                <p className="text-3xl font-semibold mb-1 nova-stat-value">{stat.value}</p>
+                <p className="text-sm text-gray-400 nova-stat-label">{stat.label}</p>
               </GlassCard>
             );
           })}
@@ -84,8 +84,8 @@ const ProfilePage = ({ language }) => {
               <Globe className="w-6 h-6" />
             </div>
             <div className="flex-1">
-              <h3 className="font-semibold mb-1">Language Preference</h3>
-              <p className="text-sm text-gray-400">Currently set to: {profile.language.toUpperCase()}</p>
+              <h3 className="font-semibold mb-1 nova-setting-title">Language Preference</h3>
+              <p className="text-sm text-gray-400 nova-setting-desc">Currently set to: {profile.language.toUpperCase()}</p>
             </div>
             <NeonButton variant="glass" size="sm" data-testid="change-language-button">
               Change

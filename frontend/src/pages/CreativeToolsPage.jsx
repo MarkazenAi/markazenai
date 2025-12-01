@@ -26,8 +26,8 @@ const CreativeToolsPage = ({ language }) => {
           <div className="flex items-center gap-4">
             <HologramLogo size="small" animate />
             <div>
-              <h1 className="text-3xl font-bold">Creative Tools</h1>
-              <p className="text-gray-400">AI-Powered Content Creation</p>
+              <h1 className="text-3xl font-semibold nova-title">Creative Intelligence</h1>
+              <p className="text-gray-400 nova-subtitle">AI-Powered Content Creation</p>
             </div>
           </div>
         </div>
@@ -35,9 +35,9 @@ const CreativeToolsPage = ({ language }) => {
         {/* Hero Section */}
         <GlassCard neon className="mb-8 text-center p-12">
           <Wand2 className="w-16 h-16 mx-auto mb-4 text-purple-400" />
-          <h2 className="text-3xl font-bold mb-4">Unleash Your Creativity</h2>
-          <p className="text-gray-300 max-w-2xl mx-auto">
-            Transform your ideas into reality with AI-powered creative tools. From text to images, code to music.
+          <h2 className="text-3xl font-semibold mb-4 nova-hero-title">Unleash Your Creativity</h2>
+          <p className="text-gray-300 max-w-2xl mx-auto nova-hero-sub">
+            Transform your ideas into reality with Nova Q7 creative tools. From text to images, code to music.
           </p>
         </GlassCard>
 
@@ -58,8 +58,8 @@ const CreativeToolsPage = ({ language }) => {
                   <div className={`w-16 h-16 mx-auto mb-4 rounded-2xl bg-gradient-to-r ${tool.color} flex items-center justify-center`}>
                     <Icon className="w-8 h-8 text-white" />
                   </div>
-                  <h3 className="font-semibold mb-1">{tool.name}</h3>
-                  <p className="text-sm text-gray-400">{tool.description}</p>
+                  <h3 className="font-semibold mb-1 nova-tool-name">{tool.name}</h3>
+                  <p className="text-sm text-gray-400 nova-tool-desc">{tool.description}</p>
                 </div>
               </GlassCard>
             );
@@ -70,10 +70,10 @@ const CreativeToolsPage = ({ language }) => {
         {selectedTool && (
           <div className="mt-8">
             <GlassCard className="p-8">
-              <h3 className="text-2xl font-bold mb-4">
+              <h3 className="text-2xl font-semibold mb-4 nova-detail-title">
                 {tools.find(t => t.id === selectedTool)?.name}
               </h3>
-              <p className="text-gray-300 mb-6">
+              <p className="text-gray-300 mb-6 nova-detail-desc">
                 This tool is coming soon! We&apos;re working on bringing you the best AI-powered creative experience.
               </p>
               <NeonButton variant="primary" data-testid="tool-coming-soon-button">
