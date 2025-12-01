@@ -327,15 +327,15 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
   },
+  
+  // Premium typography - title
   title: {
-    fontSize: Typography.fontSize.ultra,
+    fontSize: Typography.fontSize.massive,
     fontWeight: Typography.fontWeight.heavy,
     color: NovaColors.textPlatinum,
-    letterSpacing: Typography.letterSpacing.widest,
-    marginTop: Spacing.lg,
-    textShadowColor: NovaColors.primaryGlow,
-    textShadowOffset: { width: 0, height: 0 },
-    textShadowRadius: 20,
+    letterSpacing: Typography.letterSpacing.wider,
+    marginTop: Spacing.md,
+    textAlign: 'center',
   },
   subtitleGradient: {
     paddingHorizontal: Spacing.md,
