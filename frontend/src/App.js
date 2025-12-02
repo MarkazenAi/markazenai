@@ -35,6 +35,12 @@ function AppContent() {
 function AdAwareRoutes({ language, setLanguage }) {
   const { interstitialActive, rewardedActive, closeInterstitial } = useAds();
 
+  const handleCloseInterstitial = () => {
+    closeInterstitial(() => {
+      console.log('Interstitial closed');
+    });
+  };
+
   return (
     <>
       <div className="pb-20">
@@ -52,7 +58,7 @@ function AdAwareRoutes({ language, setLanguage }) {
       {interstitialActive && (
         <InterstitialAd 
           adId={interstitialActive} 
-          onClose={closeInterstitial} 
+          onClose={handleCloseInterstitial} 
         />
       )}
 
@@ -61,7 +67,7 @@ function AdAwareRoutes({ language, setLanguage }) {
           adId={rewardedActive}
           onSuccess={() => console.log('Reward granted')}
           onFail={() => console.log('Ad failed')}
-          onClose={() => {}}
+          onClose={() => closeInterstitial()}
         />
       )}
     </>
