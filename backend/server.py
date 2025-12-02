@@ -297,6 +297,77 @@ async def get_conversation_history(session_id: str):
     ).sort("timestamp", 1).to_list(1000)
     return {"session_id": session_id, "messages": conversations}
 
+# Authentication routes
+def hash_password(password: str) -> str:
+    """Simple password hashing using SHA-256"""
+    return hashlib.sha256(password.encode()).hexdigest()
+
+@api_router.post("/user/register")
+async def register_user(user: UserRegister):
+    """Register a new user"""
+    try:
+        # Check if user already exists
+        existing_user = await db.users.find_one({"email": user.email}, {"_id": 0})
+        if existing_user:
+            return {"success": False, "error": "Bu e-posta zaten kayıtlı"}
+        
+        # Create new user
+        new_user = {
+            "id": str(uuid.uuid4()),
+            "email": user.email,
+            "password": hash_password(user.password),
+            "name": user.name,
+            "created_at": datetime.now(timezone.utc).isoformat()
+        }
+        
+        await db.users.insert_one(new_user)
+        
+        # Remove password from response
+        new_user.pop("password")
+        
+        return {
+            "success": True,
+            "user": new_user,
+            "message": "Kayıt başarılı"
+        }
+    except Exception as e:
+        logging.error(f"Registration error: {str(e)}")
+        return {"success": False, "error": "Kayıt hatası"}
+
+@api_router.post("/user/login")
+async def login_user(user: UserLogin):
+    """Login existing user"""
+    try:
+        # Find user
+        found_user = await db.users.find_one({"email": user.email}, {"_id": 0})
+        
+        if not found_user:
+            return {"success": False, "error": "Kullanıcı bulunamadı"}
+        
+        # Verify password
+        if found_user["password"] != hash_password(user.password):
+            return {"success": False, "error": "Hatalı şifre"}
+        
+        # Remove password from response
+        found_user.pop("password")
+        
+        return {
+            "success": True,
+            "user": found_user,
+            "message": "Giriş başarılı"
+        }
+    except Exception as e:
+        logging.error(f"Login error: {str(e)}")
+        return {"success": False, "error": "Giriş hatası"}
+
+@api_router.get("/user/info/{user_id}")
+async def get_user_info(user_id: str):
+    """Get user information"""
+    user = await db.users.find_one({"id": user_id}, {"_id": 0, "password": 0})
+    if not user:
+        raise HTTPException(status_code=404, detail="Kullanıcı bulunamadı")
+    return user
+
 # Include the router in the main app
 app.include_router(api_router)
 
