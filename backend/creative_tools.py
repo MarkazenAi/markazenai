@@ -58,11 +58,10 @@ class ImageGenerator:
 
 
 class VoiceGenerator:
-    """Text-to-Speech using edge-tts (free Microsoft voices)"""
+    """Text-to-Speech using gTTS (free Google TTS)"""
     
     def __init__(self):
-        # Default to Turkish voice, but can be changed
-        self.default_voice = "tr-TR-AhmetNeural"  # Turkish male voice
+        self.default_lang = "tr"  # Turkish
     
     async def generate(
         self,
@@ -70,18 +69,24 @@ class VoiceGenerator:
         voice: Optional[str] = None,
         language: str = "tr"
     ) -> Dict[str, Any]:
-        """Generate speech from text"""
+        """Generate speech from text using Google TTS"""
         try:
-            # Select voice based on language
-            selected_voice = voice or self._get_voice_for_language(language)
+            from gtts import gTTS
+            
+            # Select language (gTTS uses language codes, not voice names)
+            lang = language or self.default_lang
+            
+            # Limit text length for performance
+            if len(text) > 500:
+                text = text[:500] + "..."
             
             # Create temporary file for audio
             with tempfile.NamedTemporaryFile(delete=False, suffix=".mp3") as tmp_file:
                 output_path = tmp_file.name
             
-            # Generate speech
-            communicate = edge_tts.Communicate(text, selected_voice)
-            await communicate.save(output_path)
+            # Generate speech using gTTS
+            tts = gTTS(text=text, lang=lang, slow=False)
+            tts.save(output_path)
             
             # Read and encode audio file
             with open(output_path, "rb") as audio_file:
@@ -95,8 +100,9 @@ class VoiceGenerator:
                 "success": True,
                 "audio_base64": audio_base64,
                 "format": "mp3",
-                "voice": selected_voice,
-                "text_length": len(text)
+                "language": lang,
+                "text_length": len(text),
+                "provider": "Google TTS"
             }
         except Exception as e:
             logger.error(f"TTS generation failed: {str(e)}")
