@@ -239,6 +239,18 @@ const ChatPage = ({ language }) => {
       {/* Input Area */}
       <div className="fixed bottom-20 left-0 right-0 p-4 backdrop-blur-xl bg-black/30 border-t border-white/10">
         <div className="max-w-4xl mx-auto flex gap-2">
+          <button
+            onClick={handleVoiceChat}
+            className={`h-12 w-12 rounded-xl flex items-center justify-center transition-all ${
+              voiceUnlocked 
+                ? 'bg-gradient-to-r from-purple-500 to-blue-600 text-white' 
+                : 'bg-white/5 text-gray-400 hover:bg-white/10'
+            }`}
+            data-testid="voice-chat-button"
+            title={voiceUnlocked ? 'Voice chat enabled' : 'Unlock voice chat'}
+          >
+            <Mic className="w-5 h-5" />
+          </button>
           <Input
             type="text"
             placeholder="Type your message..."
