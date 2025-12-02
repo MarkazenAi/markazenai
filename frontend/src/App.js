@@ -48,6 +48,7 @@ function AdAwareRoutes({ language, setLanguage }) {
         <Routes>
           <Route path="/" element={<HomePage language={language} />} />
           <Route path="/modules" element={<ModulesPage language={language} />} />
+          <Route path="/modules/:moduleId" element={<ModuleDetailPage language={language} />} />
           <Route path="/chat" element={<ChatPage language={language} />} />
           <Route path="/creative" element={<CreativeToolsPage language={language} />} />
           <Route path="/profile" element={<ProfilePage language={language} />} />
