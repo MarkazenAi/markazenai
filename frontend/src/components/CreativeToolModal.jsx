@@ -157,29 +157,36 @@ const CreativeToolModal = ({ tool, onClose, language }) => {
                 <Sparkles className="w-5 h-5 text-cyan-400" />
                 Sonuç
               </h3>
-              {tool.id === 'voice-gen' && result.includes('http') && (
-                <NeonButton
-                  variant="glass"
-                  size="sm"
-                  onClick={() => {
-                    const audio = new Audio(result);
-                    audio.play();
-                  }}
-                >
-                  <Download className="w-4 h-4 mr-2" />
-                  Oynat
-                </NeonButton>
-              )}
             </div>
             <div className="prose prose-invert max-w-none">
-              {tool.id === 'voice-gen' && result.includes('http') ? (
-                <audio controls className="w-full">
-                  <source src={result} type="audio/mp3" />
-                </audio>
-              ) : tool.id === 'image-gen' && result.includes('http') ? (
-                <img src={result} alt="Generated" className="w-full rounded-lg" />
+              {result.type === 'image' ? (
+                <img 
+                  src={`data:image/png;base64,${result.data}`} 
+                  alt="AI Generated" 
+                  className="w-full rounded-lg shadow-lg"
+                />
+              ) : result.type === 'audio' ? (
+                <div>
+                  <audio controls className="w-full mb-4">
+                    <source src={`data:audio/mp3;base64,${result.data}`} type="audio/mp3" />
+                    Tarayıcınız audio elementini desteklemiyor.
+                  </audio>
+                  <NeonButton
+                    variant="glass"
+                    size="sm"
+                    onClick={() => {
+                      const audio = new Audio(`data:audio/mp3;base64,${result.data}`);
+                      audio.play();
+                    }}
+                  >
+                    <Download className="w-4 h-4 mr-2" />
+                    Oynat
+                  </NeonButton>
+                </div>
               ) : (
-                <pre className="text-gray-200 whitespace-pre-wrap break-words">{result}</pre>
+                <div className="text-gray-200 whitespace-pre-wrap break-words">
+                  {result.data}
+                </div>
               )}
             </div>
           </div>
