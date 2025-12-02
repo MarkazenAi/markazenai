@@ -56,8 +56,8 @@ const CreativeToolsPage = ({ language }) => {
               <GlassCard
                 key={tool.id}
                 hover
-                neon={selectedTool === tool.id}
-                onClick={() => setSelectedTool(tool.id)}
+                neon={selectedTool?.id === tool.id}
+                onClick={() => handleToolClick(tool.id)}
                 data-testid={`creative-tool-${tool.id}`}
                 className="cursor-pointer"
               >
@@ -73,21 +73,16 @@ const CreativeToolsPage = ({ language }) => {
           })}
         </div>
 
-        {/* Selected Tool Details */}
-        {selectedTool && (
-          <div className="mt-8">
-            <GlassCard className="p-8">
-              <h3 className="text-2xl font-bold mb-4 nova-detail-title tracking-tight">
-                {tools.find(t => t.id === selectedTool)?.name}
-              </h3>
-              <p className="text-gray-300 mb-6 nova-detail-desc">
-                This tool is coming soon! We&apos;re working on bringing you the best AI-powered creative experience.
-              </p>
-              <NeonButton variant="primary" data-testid="tool-coming-soon-button">
-                Stay Tuned
-              </NeonButton>
-            </GlassCard>
-          </div>
+        {/* Creative Tool Modal */}
+        {showModal && selectedTool && (
+          <CreativeToolModal
+            tool={selectedTool}
+            onClose={() => {
+              setShowModal(false);
+              setSelectedTool(null);
+            }}
+            language={language || 'tr'}
+          />
         )}
       </div>
     </div>
