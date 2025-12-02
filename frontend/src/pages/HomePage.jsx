@@ -138,6 +138,11 @@ const HomePage = ({ language }) => {
             </NeonButton>
           </div>
         </GlassCard>
+
+        {/* Banner Ad - Below AI Dashboard Button */}
+        <div className="mt-8">
+          <BannerAd position="below_ai_dashboard_button" />
+        </div>
       </div>
     </div>
   );
