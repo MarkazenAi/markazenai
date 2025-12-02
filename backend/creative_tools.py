@@ -111,37 +111,25 @@ class VoiceGenerator:
                 "error": f"Voice generation failed: {str(e)}"
             }
     
-    def _get_voice_for_language(self, language: str) -> str:
-        """Get appropriate voice for language"""
-        voice_map = {
-            "tr": "tr-TR-AhmetNeural",
-            "en": "en-US-GuyNeural",
-            "es": "es-ES-AlvaroNeural",
-            "fr": "fr-FR-HenriNeural",
-            "de": "de-DE-ConradNeural",
-            "it": "it-IT-DiegoNeural",
-            "pt": "pt-BR-AntonioNeural",
-            "ja": "ja-JP-KeitaNeural",
-            "ko": "ko-KR-InJoonNeural",
-            "zh": "zh-CN-YunxiNeural",
-        }
-        return voice_map.get(language, self.default_voice)
-    
-    async def get_available_voices(self) -> list:
-        """Get list of available voices"""
-        try:
-            voices = await edge_tts.list_voices()
-            return [
-                {
-                    "name": v["Name"],
-                    "language": v["Locale"],
-                    "gender": v["Gender"]
-                }
-                for v in voices[:50]  # Return first 50 voices
-            ]
-        except Exception as e:
-            logger.error(f"Failed to get voices: {str(e)}")
-            return []
+    async def get_available_languages(self) -> list:
+        """Get list of supported languages for gTTS"""
+        # gTTS supports many languages - returning most common
+        languages = [
+            {"code": "tr", "name": "Turkish"},
+            {"code": "en", "name": "English"},
+            {"code": "es", "name": "Spanish"},
+            {"code": "fr", "name": "French"},
+            {"code": "de", "name": "German"},
+            {"code": "it", "name": "Italian"},
+            {"code": "pt", "name": "Portuguese"},
+            {"code": "ja", "name": "Japanese"},
+            {"code": "ko", "name": "Korean"},
+            {"code": "zh", "name": "Chinese"},
+            {"code": "ar", "name": "Arabic"},
+            {"code": "hi", "name": "Hindi"},
+            {"code": "ru", "name": "Russian"},
+        ]
+        return languages
 
 
 class TextGenerator:
