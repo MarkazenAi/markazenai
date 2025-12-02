@@ -11,7 +11,6 @@ import asyncio
 from typing import Optional, Dict, Any
 from emergentintegrations.llm.openai.image_generation import OpenAIImageGeneration
 from emergentintegrations.llm.chat import LlmChat, UserMessage
-import edge_tts
 
 logger = logging.getLogger(__name__)
 
