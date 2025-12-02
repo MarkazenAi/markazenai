@@ -5,7 +5,7 @@ import GlassCard from '../components/GlassCard';
 import NeonButton from '../components/NeonButton';
 import BannerAd from '../components/ads/BannerAd';
 import { useNavigate } from 'react-router-dom';
-import { Sparkles, MessageSquare, Grid3x3, TrendingUp, Zap, Globe } from 'lucide-react';
+import { Sparkles, MessageSquare, Grid3x3, TrendingUp, Zap, Globe, User, LogIn } from 'lucide-react';
 
 const BACKEND_URL = process.env.REACT_APP_BACKEND_URL;
 const API = `${BACKEND_URL}/api`;
