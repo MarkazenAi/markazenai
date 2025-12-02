@@ -15,15 +15,63 @@ import InterstitialAd from './components/ads/InterstitialAd';
 import RewardedAd from './components/ads/RewardedAd';
 import { useAds } from './components/ads/AdManager';
 
-function App() {
-  const [loading, setLoading] = useState(true);
+function AppContent() {
   const [language, setLanguage] = useState(() => {
-    // Detect browser language on initial mount
     return navigator.language.split('-')[0];
   });
 
+  return (
+    <ErrorBoundary>
+      <div className="App min-h-screen bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900 text-white">
+        <BrowserRouter>
+          <AdAwareRoutes language={language} setLanguage={setLanguage} />
+          <BottomNav />
+        </BrowserRouter>
+      </div>
+    </ErrorBoundary>
+  );
+}
+
+function AdAwareRoutes({ language, setLanguage }) {
+  const { interstitialActive, rewardedActive, closeInterstitial } = useAds();
+
+  return (
+    <>
+      <div className="pb-20">
+        <Routes>
+          <Route path="/" element={<HomePage language={language} />} />
+          <Route path="/modules" element={<ModulesPage language={language} />} />
+          <Route path="/chat" element={<ChatPage language={language} />} />
+          <Route path="/creative" element={<CreativeToolsPage language={language} />} />
+          <Route path="/profile" element={<ProfilePage language={language} />} />
+          <Route path="/settings" element={<SettingsPage language={language} setLanguage={setLanguage} />} />
+          <Route path="*" element={<Navigate to="/" replace />} />
+        </Routes>
+      </div>
+
+      {interstitialActive && (
+        <InterstitialAd 
+          adId={interstitialActive} 
+          onClose={closeInterstitial} 
+        />
+      )}
+
+      {rewardedActive && (
+        <RewardedAd 
+          adId={rewardedActive}
+          onSuccess={() => console.log('Reward granted')}
+          onFail={() => console.log('Ad failed')}
+          onClose={() => {}}
+        />
+      )}
+    </>
+  );
+}
+
+function App() {
+  const [loading, setLoading] = useState(true);
+
   useEffect(() => {
-    // Simulate initial loading
     const timer = setTimeout(() => setLoading(false), 2000);
     return () => clearTimeout(timer);
   }, []);
@@ -33,24 +81,9 @@ function App() {
   }
 
   return (
-    <ErrorBoundary>
-      <div className="App min-h-screen bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900 text-white">
-        <BrowserRouter>
-          <div className="pb-20">
-            <Routes>
-              <Route path="/" element={<HomePage language={language} />} />
-              <Route path="/modules" element={<ModulesPage language={language} />} />
-              <Route path="/chat" element={<ChatPage language={language} />} />
-              <Route path="/creative" element={<CreativeToolsPage language={language} />} />
-              <Route path="/profile" element={<ProfilePage language={language} />} />
-              <Route path="/settings" element={<SettingsPage language={language} setLanguage={setLanguage} />} />
-              <Route path="*" element={<Navigate to="/" replace />} />
-            </Routes>
-          </div>
-          <BottomNav />
-        </BrowserRouter>
-      </div>
-    </ErrorBoundary>
+    <AdProvider>
+      <AppContent />
+    </AdProvider>
   );
 }
 
