@@ -22,9 +22,16 @@ const ChatPage = ({ language }) => {
   const [sessionId] = useState(() => `session-${Date.now()}`);
   const [voiceUnlocked, setVoiceUnlocked] = useState(false);
   const messagesEndRef = useRef(null);
+  
+  // Provider selection state
+  const [providers, setProviders] = useState({});
+  const [selectedProvider, setSelectedProvider] = useState('openai');
+  const [selectedModel, setSelectedModel] = useState('gpt-5-mini');
+  const [showProviderMenu, setShowProviderMenu] = useState(false);
 
   useEffect(() => {
     fetchAgents();
+    fetchProviders();
     
     // Show interstitial ad on page enter (once per day)
     showInterstitial('full_chat_open', 'once_per_day', () => {
