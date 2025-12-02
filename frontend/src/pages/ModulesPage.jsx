@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
 import GlassCard from '../components/GlassCard';
 import NeonButton from '../components/NeonButton';
 import HologramLogo from '../components/HologramLogo';
