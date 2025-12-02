@@ -12,16 +12,23 @@ const BACKEND_URL = process.env.REACT_APP_BACKEND_URL;
 const API = `${BACKEND_URL}/api`;
 
 const ChatPage = ({ language }) => {
+  const { showInterstitial, showRewarded } = useAds();
   const [agents, setAgents] = useState([]);
   const [selectedAgent, setSelectedAgent] = useState(null);
   const [messages, setMessages] = useState([]);
   const [inputMessage, setInputMessage] = useState('');
   const [loading, setLoading] = useState(false);
   const [sessionId] = useState(() => `session-${Date.now()}`);
+  const [voiceUnlocked, setVoiceUnlocked] = useState(false);
   const messagesEndRef = useRef(null);
 
   useEffect(() => {
     fetchAgents();
+    
+    // Show interstitial ad on page enter (once per day)
+    showInterstitial('full_chat_open', 'once_per_day', () => {
+      console.log('Interstitial closed, chat ready');
+    });
   }, []);
 
   useEffect(() => {
