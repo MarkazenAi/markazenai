@@ -10,15 +10,20 @@ const CreativeToolsPage = ({ language }) => {
   const [showModal, setShowModal] = useState(false);
 
   const tools = [
-    { id: 'text-gen', icon: FileText, name: 'Text Generator', description: 'Create compelling content', color: 'from-cyan-500 to-blue-500' },
-    { id: 'image-gen', icon: Image, name: 'Image Creator', description: 'AI-powered visuals', color: 'from-purple-500 to-pink-500' },
-    { id: 'code-gen', icon: Code, name: 'Code Assistant', description: 'Generate & debug code', color: 'from-green-500 to-emerald-500' },
-    { id: 'music-gen', icon: Music, name: 'Music Composer', description: 'Create melodies', color: 'from-pink-500 to-rose-500' },
-    { id: 'video-gen', icon: Video, name: 'Video Editor', description: 'Edit with AI', color: 'from-orange-500 to-red-500' },
-    { id: 'voice-gen', icon: Mic, name: 'Voice Generator', description: 'Text to speech', color: 'from-indigo-500 to-purple-500' },
-    { id: 'design-gen', icon: Palette, name: 'Design Tools', description: 'UI/UX assistance', color: 'from-yellow-500 to-orange-500' },
-    { id: 'story-gen', icon: Wand2, name: 'Story Writer', description: 'Narrative creation', color: 'from-teal-500 to-cyan-500' },
+    { id: 'text-gen', icon: FileText, name: 'Text Generator', description: 'İçerik oluştur', color: 'from-cyan-500 to-blue-500' },
+    { id: 'image-gen', icon: Image, name: 'Image Creator', description: 'AI görsel üret', color: 'from-purple-500 to-pink-500' },
+    { id: 'code-gen', icon: Code, name: 'Code Assistant', description: 'Kod oluştur & debug', color: 'from-green-500 to-emerald-500' },
+    { id: 'music-gen', icon: Music, name: 'Music Composer', description: 'Müzik bestele', color: 'from-pink-500 to-rose-500' },
+    { id: 'video-gen', icon: Video, name: 'Video Editor', description: 'AI video düzenle', color: 'from-orange-500 to-red-500' },
+    { id: 'voice-gen', icon: Mic, name: 'Voice Generator', description: 'Metin -> Ses', color: 'from-indigo-500 to-purple-500' },
+    { id: 'design-gen', icon: Palette, name: 'Design Tools', description: 'UI/UX yardımı', color: 'from-yellow-500 to-orange-500' },
+    { id: 'story-gen', icon: Wand2, name: 'Story Writer', description: 'Hikaye yaz', color: 'from-teal-500 to-cyan-500' },
   ];
+
+  const handleToolClick = (toolId) => {
+    setSelectedTool(tools.find(t => t.id === toolId));
+    setShowModal(true);
+  };
 
   return (
     <div className="min-h-screen p-6 pb-24" data-testid="creative-tools-page">
