@@ -277,9 +277,16 @@ const ChatPage = ({ language }) => {
               >
                 <p className="whitespace-pre-wrap">{message.content}</p>
                 {message.agent && (
-                  <p className="text-xs text-gray-400 mt-2">
-                    {message.agent.icon} {message.agent.name}
-                  </p>
+                  <div className="flex items-center justify-between mt-2 text-xs text-gray-400">
+                    <span>{message.agent.icon} {message.agent.name}</span>
+                    {message.provider && (
+                      <span className="flex items-center gap-1">
+                        <Sparkles className="w-3 h-3" />
+                        {message.model}
+                        {message.fallback_used && <span className="text-yellow-400">(fallback)</span>}
+                      </span>
+                    )}
+                  </div>
                 )}
               </GlassCard>
 
