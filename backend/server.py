@@ -12,6 +12,7 @@ from datetime import datetime, timezone
 from emergentintegrations.llm.chat import LlmChat, UserMessage
 from ai_agents import AI_AGENTS, AI_MODULES, get_agent_by_id, get_module_by_id
 from language_detector import detect_language, get_language_name, SUPPORTED_LANGUAGES
+import hashlib
 
 
 ROOT_DIR = Path(__file__).parent
