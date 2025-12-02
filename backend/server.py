@@ -172,10 +172,10 @@ async def get_agent(agent_id: str):
         raise HTTPException(status_code=404, detail="Agent not found")
     return agent
 
-# Chat endpoint with multi-agent support
+# Chat endpoint with multi-provider support
 @api_router.post("/chat", response_model=ChatResponse)
 async def chat_with_agent(message: ChatMessage):
-    """Chat with AI agent using Emergent LLM"""
+    """Chat with AI agent using multi-provider system with fallback"""
     try:
         # Get agent configuration
         agent = get_agent_by_id(message.agent_id or "general-assistant")
@@ -186,18 +186,17 @@ async def chat_with_agent(message: ChatMessage):
         # Generate session ID if not provided
         session_id = message.session_id or str(uuid.uuid4())
         
-        # Initialize LLM chat with agent's system prompt
-        chat = LlmChat(
-            api_key=EMERGENT_LLM_KEY,
+        # Use provider router for multi-provider chat
+        result = await provider_router.chat(
+            message=message.text,
+            provider=message.provider or "openai",
+            model=message.model,
             session_id=session_id,
-            system_message=agent["system_prompt"]
-        ).with_model("openai", "gpt-4o-mini")
+            system_prompt=agent["system_prompt"],
+            use_fallback=True
+        )
         
-        # Create user message
-        user_message = UserMessage(text=message.text)
-        
-        # Get response
-        response_text = await chat.send_message(user_message)
+        response_text = result["response"]
         
         # Store conversation in database
         conversation_doc = {
@@ -207,6 +206,9 @@ async def chat_with_agent(message: ChatMessage):
             "user_message": message.text,
             "ai_response": response_text,
             "language": detected_lang,
+            "provider": result["provider"],
+            "model": result["model"],
+            "fallback_used": result["fallback_used"],
             "timestamp": datetime.now(timezone.utc).isoformat()
         }
         await db.conversations.insert_one(conversation_doc)
@@ -216,7 +218,10 @@ async def chat_with_agent(message: ChatMessage):
             agent_id=agent["id"],
             agent_name=agent["name"],
             detected_language=detected_lang,
-            session_id=session_id
+            session_id=session_id,
+            provider=result["provider"],
+            model=result["model"],
+            fallback_used=result.get("fallback_used", False)
         )
     except Exception as e:
         logging.error(f"Chat error: {str(e)}")
