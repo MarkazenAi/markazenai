@@ -404,10 +404,10 @@ async def generate_design(request: CreativeRequest):
 
 @api_router.get("/creative/voices")
 async def get_available_voices():
-    """Get list of available TTS voices"""
+    """Get list of available TTS languages"""
     try:
-        voices = await voice_generator.get_available_voices()
-        return {"voices": voices, "total": len(voices)}
+        languages = await voice_generator.get_available_languages()
+        return {"languages": languages, "total": len(languages)}
     except Exception as e:
         logging.error(f"Voice list error: {str(e)}")
         raise HTTPException(status_code=500, detail=str(e))
