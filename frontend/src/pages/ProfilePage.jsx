@@ -5,20 +5,53 @@ import HologramLogo from '../components/HologramLogo';
 import { User, Mail, Globe, Calendar, TrendingUp, MessageSquare, Sparkles } from 'lucide-react';
 
 const ProfilePage = ({ language }) => {
-  const [profile, setProfile] = useState({
-    name: 'AI Explorer',
-    email: 'explorer@novaq7.ai',
-    avatar: null,
-    language: language || 'en',
-    joinedDate: new Date().toLocaleDateString(),
-    stats: {
-      conversations: 127,
-      modulesUsed: 18,
-      hoursActive: 45
-    }
-  });
-
+  const navigate = useNavigate();
+  const [profile, setProfile] = useState(null);
+  const [loading, setLoading] = useState(true);
   const [editing, setEditing] = useState(false);
+
+  useEffect(() => {
+    const user = localStorage.getItem('nova_user');
+    if (!user) {
+      navigate('/auth');
+      return;
+    }
+    
+    try {
+      const userData = JSON.parse(user);
+      setProfile({
+        name: userData.name || 'AI Explorer',
+        email: userData.email,
+        avatar: null,
+        language: language || 'en',
+        joinedDate: userData.created_at 
+          ? new Date(userData.created_at).toLocaleDateString('tr-TR') 
+          : new Date().toLocaleDateString('tr-TR'),
+        stats: {
+          conversations: 127,
+          modulesUsed: 18,
+          hoursActive: 45
+        }
+      });
+    } catch (e) {
+      console.error('Error loading user data:', e);
+    } finally {
+      setLoading(false);
+    }
+  }, [navigate, language]);
+
+  const handleLogout = () => {
+    localStorage.removeItem('nova_user');
+    navigate('/auth');
+  };
+
+  if (loading || !profile) {
+    return (
+      <div className="min-h-screen flex items-center justify-center">
+        <HologramLogo size="normal" animate />
+      </div>
+    );
+  };
 
   const stats = [
     { icon: MessageSquare, label: 'Conversations', value: profile.stats.conversations, color: 'text-cyan-400' },
