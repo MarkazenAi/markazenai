@@ -126,6 +126,19 @@ const ProfilePage = ({ language }) => {
             </NeonButton>
           </div>
         </GlassCard>
+
+        {/* Logout Button */}
+        <div className="mt-6">
+          <NeonButton
+            variant="outline"
+            className="w-full"
+            onClick={handleLogout}
+            data-testid="logout-button"
+          >
+            <LogOut className="w-5 h-5 mr-2" />
+            Çıkış Yap
+          </NeonButton>
+        </div>
       </div>
     </div>
   );
