@@ -274,6 +274,144 @@ async def execute_module(request: ModuleRequest):
         logging.error(f"Module execution error: {str(e)}")
         raise HTTPException(status_code=500, detail=f"Module execution failed: {str(e)}")
 
+# Creative Tools Endpoints
+
+@api_router.post("/creative/image-gen")
+async def generate_image(request: CreativeRequest):
+    """Generate AI images from text prompts"""
+    try:
+        result = await image_generator.generate(
+            prompt=request.input,
+            model=request.model or "gpt-image-1",
+            num_images=1
+        )
+        return result
+    except Exception as e:
+        logging.error(f"Image generation error: {str(e)}")
+        raise HTTPException(status_code=500, detail=str(e))
+
+@api_router.post("/creative/voice-gen")
+async def generate_voice(request: CreativeRequest):
+    """Generate speech from text using TTS"""
+    try:
+        result = await voice_generator.generate(
+            text=request.input,
+            language=request.language
+        )
+        return result
+    except Exception as e:
+        logging.error(f"Voice generation error: {str(e)}")
+        raise HTTPException(status_code=500, detail=str(e))
+
+@api_router.post("/creative/text-gen")
+async def generate_text(request: CreativeRequest):
+    """Generate formatted text content"""
+    try:
+        result = await text_generator.generate(
+            prompt=request.input,
+            type="general",
+            provider=request.provider or "openai",
+            model=request.model or "gpt-5-mini"
+        )
+        return result
+    except Exception as e:
+        logging.error(f"Text generation error: {str(e)}")
+        raise HTTPException(status_code=500, detail=str(e))
+
+@api_router.post("/creative/code-gen")
+async def generate_code(request: CreativeRequest):
+    """Generate code from natural language"""
+    try:
+        result = await code_generator.generate(
+            prompt=request.input,
+            language="python",
+            provider=request.provider or "openai",
+            model=request.model or "gpt-5"
+        )
+        return result
+    except Exception as e:
+        logging.error(f"Code generation error: {str(e)}")
+        raise HTTPException(status_code=500, detail=str(e))
+
+@api_router.post("/creative/story-gen")
+async def generate_story(request: CreativeRequest):
+    """Generate creative stories"""
+    try:
+        result = await text_generator.generate(
+            prompt=request.input,
+            type="story",
+            provider=request.provider or "openai",
+            model=request.model or "gpt-5-mini"
+        )
+        return result
+    except Exception as e:
+        logging.error(f"Story generation error: {str(e)}")
+        raise HTTPException(status_code=500, detail=str(e))
+
+@api_router.post("/creative/music-gen")
+async def generate_music(request: CreativeRequest):
+    """Music generation placeholder - fallback to text description"""
+    try:
+        # For now, return music composition as text/MIDI description
+        result = await text_generator.generate(
+            prompt=f"Create a detailed music composition description for: {request.input}. Include: tempo, key, instruments, chord progressions, and melody description.",
+            type="general",
+            provider=request.provider or "openai",
+            model=request.model or "gpt-5-mini"
+        )
+        return {
+            "success": True,
+            "result": result["result"],
+            "note": "Music generation returns composition description. Full audio generation coming soon."
+        }
+    except Exception as e:
+        logging.error(f"Music generation error: {str(e)}")
+        raise HTTPException(status_code=500, detail=str(e))
+
+@api_router.post("/creative/video-gen")
+async def generate_video(request: CreativeRequest):
+    """Video generation placeholder - returns script/storyboard"""
+    try:
+        result = await text_generator.generate(
+            prompt=f"Create a detailed video storyboard and script for: {request.input}. Include: scenes, camera angles, transitions, and dialogue.",
+            type="general",
+            provider=request.provider or "openai",
+            model=request.model or "gpt-5-mini"
+        )
+        return {
+            "success": True,
+            "result": result["result"],
+            "note": "Video generation returns storyboard/script. Full video generation coming soon."
+        }
+    except Exception as e:
+        logging.error(f"Video generation error: {str(e)}")
+        raise HTTPException(status_code=500, detail=str(e))
+
+@api_router.post("/creative/design-gen")
+async def generate_design(request: CreativeRequest):
+    """Design assistance - UI/UX suggestions"""
+    try:
+        result = await text_generator.generate(
+            prompt=f"Provide detailed UI/UX design suggestions for: {request.input}. Include: layout, colors, typography, components, and user flow.",
+            type="general",
+            provider=request.provider or "openai",
+            model=request.model or "gpt-5-mini"
+        )
+        return result
+    except Exception as e:
+        logging.error(f"Design generation error: {str(e)}")
+        raise HTTPException(status_code=500, detail=str(e))
+
+@api_router.get("/creative/voices")
+async def get_available_voices():
+    """Get list of available TTS voices"""
+    try:
+        voices = await voice_generator.get_available_voices()
+        return {"voices": voices, "total": len(voices)}
+    except Exception as e:
+        logging.error(f"Voice list error: {str(e)}")
+        raise HTTPException(status_code=500, detail=str(e))
+
 # Language detection
 @api_router.post("/language/detect")
 async def detect_text_language(request: LanguageDetectionRequest):
