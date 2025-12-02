@@ -55,6 +55,24 @@ const ChatPage = ({ language }) => {
     }
   };
 
+  const fetchProviders = async () => {
+    try {
+      const response = await axios.get(`${API}/providers`);
+      setProviders(response.data.providers || {});
+    } catch (error) {
+      console.error('Failed to fetch providers:', error);
+    }
+  };
+
+  const handleProviderChange = (provider) => {
+    setSelectedProvider(provider);
+    const defaultModel = providers[provider]?.default_model;
+    if (defaultModel) {
+      setSelectedModel(defaultModel);
+    }
+    setShowProviderMenu(false);
+  };
+
   const scrollToBottom = () => {
     messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
   };
