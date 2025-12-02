@@ -6,13 +6,17 @@ import os
 import logging
 from pathlib import Path
 from pydantic import BaseModel, Field, ConfigDict
-from typing import List, Optional
+from typing import List, Optional, Dict, Any
 import uuid
 from datetime import datetime, timezone
 from emergentintegrations.llm.chat import LlmChat, UserMessage
 from ai_agents import AI_AGENTS, AI_MODULES, get_agent_by_id, get_module_by_id
 from language_detector import detect_language, get_language_name, SUPPORTED_LANGUAGES
 import hashlib
+
+# Import new modules
+from providers import AIProviderRouter, PROVIDER_MODELS
+from creative_tools import ImageGenerator, VoiceGenerator, TextGenerator, CodeGenerator
 
 
 ROOT_DIR = Path(__file__).parent
