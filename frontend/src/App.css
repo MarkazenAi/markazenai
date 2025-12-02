@@ -235,3 +235,19 @@
     transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
   }
 }
+
+/* Voice Button Pulse Animation */
+@keyframes pulse {
+  0%, 100% {
+    transform: scale(1);
+    box-shadow: 0 0 0 0 rgba(111, 0, 255, 0.7);
+  }
+  50% {
+    transform: scale(1.05);
+    box-shadow: 0 0 0 10px rgba(111, 0, 255, 0);
+  }
+}
+
+.voice-button.listening {
+  animation: pulse 1.5s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+}
