@@ -81,6 +81,15 @@ class UserSettings(BaseModel):
     notifications: bool = True
     offline_mode: bool = False
 
+class UserRegister(BaseModel):
+    email: str
+    password: str
+    name: str
+
+class UserLogin(BaseModel):
+    email: str
+    password: str
+
 
 # Basic routes
 @api_router.get("/")
