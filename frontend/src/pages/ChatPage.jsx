@@ -276,9 +276,13 @@ const ChatPage = ({ language }) => {
                     : ''
                 }`}
               >
-                <p className="whitespace-pre-wrap">{message.content}</p>
+                {message.role === 'assistant' && !message.error ? (
+                  <FormattedAIResponse content={message.content} />
+                ) : (
+                  <p className="whitespace-pre-wrap text-gray-200">{message.content}</p>
+                )}
                 {message.agent && (
-                  <div className="flex items-center justify-between mt-2 text-xs text-gray-400">
+                  <div className="flex items-center justify-between mt-3 pt-3 border-t border-white/10 text-xs text-gray-400">
                     <span>{message.agent.icon} {message.agent.name}</span>
                     {message.provider && (
                       <span className="flex items-center gap-1">
