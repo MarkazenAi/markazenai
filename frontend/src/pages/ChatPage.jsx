@@ -119,7 +119,9 @@ const ChatPage = ({ language }) => {
         text: inputMessage,
         agent_id: selectedAgent.id,
         session_id: sessionId,
-        language: language
+        language: language,
+        provider: selectedProvider,
+        model: selectedModel
       });
 
       const aiMessage = {
@@ -127,6 +129,9 @@ const ChatPage = ({ language }) => {
         role: 'assistant',
         content: response.data.response,
         agent: selectedAgent,
+        provider: response.data.provider,
+        model: response.data.model,
+        fallback_used: response.data.fallback_used,
         timestamp: new Date()
       };
 
