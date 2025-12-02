@@ -54,6 +54,7 @@ function AdAwareRoutes({ language, setLanguage }) {
           <Route path="/creative" element={<CreativeToolsPage language={language} />} />
           <Route path="/profile" element={<ProfilePage language={language} />} />
           <Route path="/settings" element={<SettingsPage language={language} setLanguage={setLanguage} />} />
+          <Route path="/auth" element={<AuthPage />} />
           <Route path="*" element={<Navigate to="/" replace />} />
         </Routes>
       </div>
