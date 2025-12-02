@@ -42,8 +42,14 @@ const ModulesPage = ({ language }) => {
   });
 
   const handleModuleClick = async (module) => {
+    // Show brief animation
     setExecuting(module.id);
-    setTimeout(() => setExecuting(null), 2000);
+    
+    // Navigate to module detail page
+    setTimeout(() => {
+      setExecuting(null);
+      navigate(`/modules/${module.id}`);
+    }, 500);
   };
 
   return (
