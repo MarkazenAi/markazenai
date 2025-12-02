@@ -117,13 +117,29 @@ class UserLogin(BaseModel):
 @api_router.get("/")
 async def root():
     return {
-        "message": "Nova Q7 Intelligence Hub API",
-        "version": "1.0.0",
+        "message": "Nova Q7 Ultra AI Intelligence Hub API",
+        "version": "7.0.0",
         "status": "operational",
         "agents": len(AI_AGENTS),
         "modules": len(AI_MODULES),
-        "languages": 75
+        "providers": len(PROVIDER_MODELS),
+        "languages": 75,
+        "features": ["multi-provider", "image-gen", "voice-gen", "code-gen"]
     }
+
+# Provider routes
+@api_router.get("/providers")
+async def get_providers():
+    """Get list of all available AI providers and their models"""
+    return {"providers": PROVIDER_MODELS}
+
+@api_router.get("/providers/{provider}/models")
+async def get_provider_models(provider: str):
+    """Get available models for a specific provider"""
+    models = provider_router.get_provider_models(provider)
+    if not models:
+        raise HTTPException(status_code=404, detail="Provider not found")
+    return {"provider": provider, "models": models}
 
 @api_router.post("/status", response_model=StatusCheck)
 async def create_status_check(input: StatusCheckCreate):
