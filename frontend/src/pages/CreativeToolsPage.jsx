@@ -2,10 +2,12 @@ import React, { useState } from 'react';
 import GlassCard from '../components/GlassCard';
 import NeonButton from '../components/NeonButton';
 import HologramLogo from '../components/HologramLogo';
+import CreativeToolModal from '../components/CreativeToolModal';
 import { Wand2, Image, Music, Video, FileText, Code, Palette, Mic } from 'lucide-react';
 
 const CreativeToolsPage = ({ language }) => {
   const [selectedTool, setSelectedTool] = useState(null);
+  const [showModal, setShowModal] = useState(false);
 
   const tools = [
     { id: 'text-gen', icon: FileText, name: 'Text Generator', description: 'Create compelling content', color: 'from-cyan-500 to-blue-500' },
