@@ -8,6 +8,7 @@ import ChatPage from './pages/ChatPage';
 import CreativeToolsPage from './pages/CreativeToolsPage';
 import ProfilePage from './pages/ProfilePage';
 import SettingsPage from './pages/SettingsPage';
+import AuthPage from './pages/AuthPage';
 import BottomNav from './components/BottomNav';
 import ErrorBoundary from './components/ErrorBoundary';
 import LoadingScreen from './components/LoadingScreen';
