@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import GlassCard from '../components/GlassCard';
 import NeonButton from '../components/NeonButton';
 import HologramLogo from '../components/HologramLogo';
-import { User, Mail, Globe, Calendar, TrendingUp, MessageSquare, Sparkles } from 'lucide-react';
+import { User, Mail, Globe, Calendar, TrendingUp, MessageSquare, Sparkles, LogOut } from 'lucide-react';
 
 const ProfilePage = ({ language }) => {
   const navigate = useNavigate();
