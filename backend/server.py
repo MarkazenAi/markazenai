@@ -30,6 +30,13 @@ db = client[os.environ['DB_NAME']]
 # Get Emergent LLM Key
 EMERGENT_LLM_KEY = os.environ.get('EMERGENT_LLM_KEY', '')
 
+# Initialize AI systems
+provider_router = AIProviderRouter(api_key=EMERGENT_LLM_KEY)
+image_generator = ImageGenerator(api_key=EMERGENT_LLM_KEY)
+voice_generator = VoiceGenerator()
+text_generator = TextGenerator(api_key=EMERGENT_LLM_KEY)
+code_generator = CodeGenerator(api_key=EMERGENT_LLM_KEY)
+
 # Create the main app without a prefix
 app = FastAPI()
 
