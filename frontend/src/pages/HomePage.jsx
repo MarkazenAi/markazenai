@@ -14,9 +14,20 @@ const HomePage = ({ language }) => {
   const navigate = useNavigate();
   const [stats, setStats] = useState({ agents: 24, modules: 32, languages: 75 });
   const [loading, setLoading] = useState(true);
+  const [user, setUser] = useState(null);
 
   useEffect(() => {
     fetchStats();
+    
+    // Check if user is logged in
+    const userData = localStorage.getItem('nova_user');
+    if (userData) {
+      try {
+        setUser(JSON.parse(userData));
+      } catch (e) {
+        console.error('Error loading user:', e);
+      }
+    }
   }, []);
 
   const fetchStats = async () => {
