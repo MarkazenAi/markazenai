@@ -63,6 +63,30 @@ const HomePage = ({ language }) => {
     <div className="min-h-screen p-6 pb-24" data-testid="home-page">
       {/* Header with Logo */}
       <div className="max-w-6xl mx-auto">
+        {/* Auth Button - Top Right */}
+        <div className="flex justify-end mb-4">
+          {user ? (
+            <button
+              onClick={() => navigate('/profile')}
+              className="flex items-center gap-2 px-4 py-2 rounded-xl bg-white/5 hover:bg-white/10 transition-colors"
+              data-testid="user-button"
+            >
+              <User className="w-4 h-4" />
+              <span className="text-sm">{user.name || user.email}</span>
+            </button>
+          ) : (
+            <NeonButton
+              variant="glass"
+              size="sm"
+              onClick={() => navigate('/auth')}
+              data-testid="login-button"
+            >
+              <LogIn className="w-4 h-4 mr-2" />
+              Giriş Yap
+            </NeonButton>
+          )}
+        </div>
+
         <div className="text-center mb-12 mt-8 animate-fade-up">
           <div className="flex justify-center mb-6">
             <HologramLogo size="large" animate={true} />
