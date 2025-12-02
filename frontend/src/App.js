@@ -10,6 +10,10 @@ import SettingsPage from './pages/SettingsPage';
 import BottomNav from './components/BottomNav';
 import ErrorBoundary from './components/ErrorBoundary';
 import LoadingScreen from './components/LoadingScreen';
+import { AdProvider } from './components/ads/AdManager';
+import InterstitialAd from './components/ads/InterstitialAd';
+import RewardedAd from './components/ads/RewardedAd';
+import { useAds } from './components/ads/AdManager';
 
 function App() {
   const [loading, setLoading] = useState(true);
