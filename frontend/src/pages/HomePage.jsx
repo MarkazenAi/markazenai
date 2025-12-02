@@ -3,6 +3,7 @@ import axios from 'axios';
 import HologramLogo from '../components/HologramLogo';
 import GlassCard from '../components/GlassCard';
 import NeonButton from '../components/NeonButton';
+import BannerAd from '../components/ads/BannerAd';
 import { useNavigate } from 'react-router-dom';
 import { Sparkles, MessageSquare, Grid3x3, TrendingUp, Zap, Globe } from 'lucide-react';
 
