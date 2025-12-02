@@ -60,6 +60,8 @@ class ChatMessage(BaseModel):
     agent_id: Optional[str] = "general-assistant"
     session_id: Optional[str] = None
     language: Optional[str] = "en"
+    provider: Optional[str] = "openai"
+    model: Optional[str] = None
 
 class ChatResponse(BaseModel):
     response: str
@@ -67,6 +69,15 @@ class ChatResponse(BaseModel):
     agent_name: str
     detected_language: str
     session_id: str
+    provider: str
+    model: str
+    fallback_used: bool = False
+
+class CreativeRequest(BaseModel):
+    input: str
+    language: Optional[str] = "tr"
+    provider: Optional[str] = "openai"
+    model: Optional[str] = None
 
 class ModuleRequest(BaseModel):
     module_id: str
