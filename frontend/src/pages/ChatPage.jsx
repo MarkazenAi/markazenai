@@ -3,9 +3,10 @@ import axios from 'axios';
 import GlassCard from '../components/GlassCard';
 import NeonButton from '../components/NeonButton';
 import HologramLogo from '../components/HologramLogo';
-import { Send, Bot, User as UserIcon, Sparkles } from 'lucide-react';
+import { Send, Bot, User as UserIcon, Sparkles, Mic } from 'lucide-react';
 import { Input } from '@/components/ui/input';
 import { ScrollArea } from '@/components/ui/scroll-area';
+import { useAds } from '../components/ads/AdManager';
 
 const BACKEND_URL = process.env.REACT_APP_BACKEND_URL;
 const API = `${BACKEND_URL}/api`;
