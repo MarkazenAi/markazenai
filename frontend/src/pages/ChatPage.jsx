@@ -51,8 +51,31 @@ const ChatPage = ({ language }) => {
     messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
   };
 
+  const handleVoiceChat = () => {
+    if (voiceUnlocked) {
+      console.log('Voice chat activated');
+      return;
+    }
+
+    showRewarded(
+      'reward_voice',
+      () => {
+        setVoiceUnlocked(true);
+        console.log('Voice chat unlocked!');
+      },
+      () => {
+        console.log('Failed to unlock voice chat');
+      }
+    );
+  };
+
   const sendMessage = async () => {
     if (!inputMessage.trim() || !selectedAgent) return;
+
+    // Show interstitial ad on generate (once per action)
+    showInterstitial('full_generate', 'once_per_action', () => {
+      console.log('Generate ad shown');
+    });
 
     const userMessage = {
       id: Date.now(),
