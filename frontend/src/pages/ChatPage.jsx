@@ -4,6 +4,7 @@ import GlassCard from '../components/GlassCard';
 import NeonButton from '../components/NeonButton';
 import HologramLogo from '../components/HologramLogo';
 import VoiceButton from '../components/VoiceButton';
+import FormattedAIResponse from '../components/FormattedAIResponse';
 import { Send, Bot, User as UserIcon, Sparkles, Mic } from 'lucide-react';
 import { Input } from '@/components/ui/input';
 import { ScrollArea } from '@/components/ui/scroll-area';
