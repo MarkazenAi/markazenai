@@ -1,0 +1,57 @@
+{
+  "short_name": "Nova Q7",
+  "name": "Nova Q7 Ultra AI - Intelligence Hub",
+  "description": "Premium AI application with multi-provider support, creative tools, and 30+ intelligent modules",
+  "icons": [
+    {
+      "src": "/logo192.png",
+      "type": "image/png",
+      "sizes": "192x192",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/logo512.png",
+      "type": "image/png",
+      "sizes": "512x512",
+      "purpose": "any maskable"
+    }
+  ],
+  "start_url": "/",
+  "display": "standalone",
+  "theme_color": "#6f00ff",
+  "background_color": "#0a0a1e",
+  "orientation": "portrait-primary",
+  "scope": "/",
+  "categories": ["productivity", "utilities", "education"],
+  "screenshots": [
+    {
+      "src": "/screenshot1.png",
+      "type": "image/png",
+      "sizes": "1920x1080"
+    }
+  ],
+  "shortcuts": [
+    {
+      "name": "AI Chat",
+      "short_name": "Chat",
+      "description": "Open AI Chat",
+      "url": "/chat",
+      "icons": [{ "src": "/logo192.png", "sizes": "192x192" }]
+    },
+    {
+      "name": "Creative Tools",
+      "short_name": "Create",
+      "description": "Open Creative Tools",
+      "url": "/creative",
+      "icons": [{ "src": "/logo192.png", "sizes": "192x192" }]
+    },
+    {
+      "name": "Smart Modules",
+      "short_name": "Modules",
+      "description": "Open AI Modules",
+      "url": "/modules",
+      "icons": [{ "src": "/logo192.png", "sizes": "192x192" }]
+    }
+  ],
+  "prefer_related_applications": false
+}
