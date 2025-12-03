@@ -34,21 +34,21 @@ const CreativeToolModal = ({ tool, onClose, language }) => {
         model: 'gpt-5-mini'
       });
 
-      if (response.data.success !== false) {
-        // Handle different response types
-        if (response.data.image_base64) {
-          setResult({ type: 'image', data: response.data.image_base64 });
-        } else if (response.data.audio_base64) {
-          setResult({ type: 'audio', data: response.data.audio_base64 });
-        } else if (response.data.result) {
-          setResult({ type: 'text', data: response.data.result });
-        } else if (response.data.success) {
-          setResult({ type: 'text', data: response.data.result || 'İşlem tamamlandı' });
-        } else {
-          setResult({ type: 'text', data: JSON.stringify(response.data, null, 2) });
-        }
-      } else {
+      // Handle different response types based on tool
+      if (response.data.success === false) {
         setError(response.data.error || 'Bir hata oluştu');
+      } else if (response.data.image_base64) {
+        setResult({ type: 'image', data: response.data.image_base64 });
+      } else if (response.data.audio_base64) {
+        setResult({ type: 'audio', data: response.data.audio_base64 });
+      } else if (response.data.result) {
+        setResult({ type: 'text', data: response.data.result });
+      } else if (response.data.success === true) {
+        // Generic success case
+        const displayData = response.data.result || response.data.note || JSON.stringify(response.data, null, 2);
+        setResult({ type: 'text', data: displayData });
+      } else {
+        setResult({ type: 'text', data: JSON.stringify(response.data, null, 2) });
       }
     } catch (err) {
       console.error('Creative tool error:', err);
